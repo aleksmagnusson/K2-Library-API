@@ -59,7 +59,7 @@ async function deleteBook(req, res) {
   res.json(deleteBook);
 }
 // exportera moduler.
-module.export = {
+module.exports = {
   getAll,
   getBook,
   postBook,
