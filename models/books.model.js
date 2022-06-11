@@ -18,16 +18,33 @@ function initBooks(sql) {
   return new Promise((resolve, reject) => {
     db.all(sql, (error, rows) => {
       resolve(rows);
+      reject(error);
     });
   });
 }
 
+//async function getAll() {
+//  const sql = "SELECT * FROM books";
+//  const result = await initBooks(sql);
+//  return result;
+//}
+
 // GET /books
 // Hämta alla böcker.
-async function getAll() {
+function getAll() {
   const sql = "SELECT * FROM books";
-  const result = await initBooks(sql);
-  return result;
+
+  return new Promise((resolve, reject) => {
+    db.all(sql, (error, rows) => {
+      if (error) {
+        console.error(error.message);
+        res.status(400);
+        reject(error);
+      }
+      res.status(200);
+      resolve(rows);
+    });
+  });
 }
 
 // GET /books/:id
