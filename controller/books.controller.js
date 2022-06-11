@@ -2,17 +2,19 @@
 const model = require("../models/books.model");
 
 // Hämtar alla böcker.
-async function getAll() {
+async function getAll(req, res) {
   const result = await model.getAll();
   res.json(result);
 }
 
 // Hämta en bok.
 async function getBook(req, res) {
-  const wantedBook = req.params.id;
-  const foundBook = await model.getBook(wantedBook);
+  const pickBook = req.params.id;
+  const foundBook = await model.getBook(pickBook);
   res.json(foundBook);
 }
+
+// Följ instruktioner. P.
 
 // Lägg till en bok.
 async function postBook(req, res) {
@@ -35,27 +37,27 @@ async function postBook(req, res) {
 // Ändrar hela värdena på en bok.
 async function putBook(req, res) {
   const { title, author, genre } = req.body;
-  const wantedBook = req.params.id;
+  const pickBook = req.params.id;
   const putBook = {
     title,
     author,
     genre,
   };
-  await model.putBook(wantedBook, putBook);
+  await model.putBook(pickBook, putBook);
   res.json(putBook);
 }
 // Ändra ett värde på en bok.
 async function patchBook(req, res) {
   const { title } = req.body;
-  const wantedBook = req.params.id;
-  const patchBook = await model.patchBook(wantedBook, title);
+  const pickBook = req.params.id;
+  const patchBook = await model.patchBook(pickBook, title);
   res.json(patchBook);
 }
 
 // Ta bort en bok.
 async function deleteBook(req, res) {
-  const wantedBook = req.params.id;
-  const deleteBook = await model.deleteBook(wantedBook);
+  const pickBook = req.params.id;
+  const deleteBook = await model.deleteBook(pickBook);
   res.json(deleteBook);
 }
 // exportera moduler.

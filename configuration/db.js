@@ -1,7 +1,7 @@
 const sqlite3 = require("sqlite3").verbose();
 
 // Skapar en ny instans av sqlite3-databasen.
-const db = new sqlite3.Database("./db.sqlite", (error) => {
+const db = new sqlite3.Database("./data/db.sqlite", (error) => {
   if (error) {
     // Felmeddelande om det inte går att öppna databasen.
     console.error(error.message);
@@ -18,24 +18,13 @@ const db = new sqlite3.Database("./db.sqlite", (error) => {
     author TEXT,
     genre TEXT)`;
 
-  // Kör databasen med db.run().
-  db.run(booksStatement),
-    (error) => {
-      if (error) {
-        // Om tabellen redan finns får användaren ett felmeddelande.
-        console.error(error.message);
-      } else {
-        // Använder insert för att få fram böcker. SQL statementet körs här.
-        const insert = `INSERT INTO books (title, author, genre) VALUES (?, ?, ?)`;
+  db.run(booksStatement, (error) => {
+    const insert = `INSERT INTO books (title, author, genre) VALUES (?, ?, ?)`;
+    //  db.run(insert, ["The Hobbit", "J. J. R. Tolkien", "Fantasy"]);
+  });
 
-        // Lägg till fasta böcker till databasen.
-        db.run(insert, ["The Hobbit", "J. J. R. Tolkien", "Fantasy"]);
-        db.run(insert, ["Abortlagarna i USA", "Ana Bortion", "Fakta"]);
-        db.run(insert, ["I farans riktning", "Viveca Sten", "Deckare"]);
-      }
-      // Får ett meddelande om böckerna är skapade.
-      console.log("Books table created.");
-    };
+  // Får ett meddelande om böckerna är skapade.
+  //  console.log("Books table created.");
 });
 
 // Exportera modulen.

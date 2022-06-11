@@ -4,13 +4,14 @@ const express = require("express");
 const app = express();
 const port = 5000;
 
+// Använder sig av app.use(express.json()) för att kunna använda json.
 app.use(express.json());
-// books Router
-const booksRouter = require("./routers/books.router");
 
+// Skapar en variabel för booksRouter där jag hämtar böckerna.
+const booksRouter = require("./routers/books.router");
+// Hämtar böcker från booksRouter.
 app.use(booksRouter);
-// Vet inte om jag behöver denna: app.use(booksController);
 
 app.listen(port, () => {
-  console.log(`Server körs på serverport $(port)`);
+  console.log(`Server körs på serverport ${port}`);
 });

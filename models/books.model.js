@@ -14,28 +14,25 @@ const res = require("express/lib/response");
  * UPDATE -- Updates existing data in a table.
  * DELETE -- Delete data from a table.
  */
-
-// GET /books
-// Hämta alla böcker.
-function getAll() {
-  const sql = "SELECT * FROM books";
-
+function initBooks(sql) {
   return new Promise((resolve, reject) => {
     db.all(sql, (error, rows) => {
-      if (error) {
-        // Sätter in statuskoder som ger tillbaka meddelanden om det gått rätt till eller fel.
-        console.error(error.message);
-        res.status(400);
-        reject(error);
-      }
-      res.status(200);
       resolve(rows);
     });
   });
 }
 
+// GET /books
+// Hämta alla böcker.
+async function getAll() {
+  const sql = "SELECT * FROM books";
+  const result = await initBooks(sql);
+  return result;
+}
+
 // GET /books/:id
 // Hämtar en bok.
+
 function getBook(id) {
   const sql = "SELECT * FROM books WHERE id = ?";
 
