@@ -48,9 +48,9 @@ async function putBook(req, res) {
 }
 // Ändra ett värde på en bok.
 async function patchBook(req, res) {
-  const { title } = req.body;
+  const { title, author, genre } = req.body;
   const pickBook = req.params.id;
-  const patchBook = await model.patchBook(pickBook, title);
+  const patchBook = await model.patchBook(pickBook, title, author, genre);
   res.json(patchBook);
 }
 

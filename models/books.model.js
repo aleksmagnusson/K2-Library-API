@@ -44,6 +44,7 @@ function getAll() {
       res.status(200);
       resolve(rows);
     });
+    console.log("Du har hämtat databasen för alla böcker.");
   });
 }
 
@@ -63,6 +64,7 @@ function getBook(id) {
       res.status(201);
       resolve(rows);
     });
+    console.log(`Du har hämtat in en bok ${id}.`);
   });
 }
 
@@ -81,6 +83,7 @@ function addBook(book) {
       res.status(200);
       resolve();
     });
+    console.log(`Du har lagt till en ny bok.`);
   });
 }
 
@@ -99,6 +102,7 @@ function putBook(id, book) {
       res.status(200);
       resolve();
     });
+    console.log(`Du har uppdaterat alla värden för boken under id ${id}.`);
   });
 }
 
@@ -117,6 +121,7 @@ function patchBook(id, book) {
       res.status(200);
       resolve();
     });
+    console.log(`Du har uppdaterat ett värde för en bok.`);
   });
 }
 
@@ -135,6 +140,7 @@ function deleteBook(id) {
       res.status(204);
       resolve();
     });
+    console.log(`Du har tagit bort boken med id ${id}.`);
   });
 }
 
